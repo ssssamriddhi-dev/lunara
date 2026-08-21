@@ -1,21 +1,40 @@
-import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, SPACING, FONT_SIZES, RADIUS } from '../constants/theme';
 import { MOODS } from '../data/moods';
 import { RESPONSES } from '../data/responses';
 import ResponseCard from '../components/ResponseCard';
+import { getCheckin, saveCheckin, todayKey } from '../storage/store';
 
 export default function HomeScreen() {
   const [selected, setSelected] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    getCheckin(todayKey()).then((entry) => {
+      if (active && entry) setSelected(entry.moods);
+      if (active) setLoading(false);
+    });
+    return () => { active = false; };
+  }, []);
 
   const toggleMood = (id) => {
-    setSelected((current) =>
-      current.includes(id)
-        ? current.filter((m) => m !== id)
-        : [...current, id]
-    );
+    const next = selected.includes(id)
+      ? selected.filter((m) => m !== id)
+      : [...selected, id];
+    setSelected(next);
+    saveCheckin(todayKey(), next);
   };
+
+  if (loading) {
+    return (
+      <SafeAreaView style={[styles.container, styles.center]}>
+        <ActivityIndicator color={COLORS.slate} />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -57,6 +76,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.background },
+  center: { alignItems: 'center', justifyContent: 'center' },
   scroll: { padding: SPACING.lg, paddingBottom: SPACING.xxl },
   greeting: { fontSize: FONT_SIZES.title, fontWeight: '600', color: COLORS.ink },
   rule: {
