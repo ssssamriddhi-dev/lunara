@@ -3,6 +3,8 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, SPACING, FONT_SIZES, RADIUS } from '../constants/theme';
 import { MOODS } from '../data/moods';
+import { RESPONSES } from '../data/responses';
+import ResponseCard from '../components/ResponseCard';
 
 export default function HomeScreen() {
   const [selected, setSelected] = useState([]);
@@ -42,12 +44,10 @@ export default function HomeScreen() {
         </View>
 
         {selected.length > 0 && (
-          <View style={styles.card}>
-            <Text style={styles.cardText}>
-              {selected.length === 1
-                ? 'Thank you for checking in.'
-                : `You selected ${selected.length} feelings.`}
-            </Text>
+          <View style={styles.responses}>
+            {selected.map((id) => (
+              <ResponseCard key={id} response={RESPONSES[id]} />
+            ))}
           </View>
         )}
       </ScrollView>
@@ -85,11 +85,5 @@ const styles = StyleSheet.create({
   chipOn: { backgroundColor: COLORS.ink, borderColor: COLORS.ink },
   chipText: { fontSize: FONT_SIZES.body, color: COLORS.textSecondary },
   chipTextOn: { color: COLORS.textOnDark },
-  card: {
-    marginTop: SPACING.xl,
-    padding: SPACING.lg,
-    borderRadius: RADIUS.md,
-    backgroundColor: COLORS.surfaceMuted,
-  },
-  cardText: { fontSize: FONT_SIZES.body, color: COLORS.textSecondary, lineHeight: 24 },
+  responses: { marginTop: SPACING.xl },
 });
