@@ -25,10 +25,10 @@ export default function AppNavigator() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarActiveTintColor: COLORS.ink,
+          tabBarActiveTintColor: COLORS.orchid,
           tabBarInactiveTintColor: COLORS.textMuted,
           tabBarStyle: {
-            backgroundColor: COLORS.surface,
+            backgroundColor: 'rgba(255,255,255,0.94)',
             borderTopColor: COLORS.border,
             borderTopWidth: 1,
             height: 88,

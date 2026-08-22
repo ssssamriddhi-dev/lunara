@@ -1,21 +1,34 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { COLORS, SPACING, FONT_SIZES } from '../constants/theme';
+import { COLORS, SPACING, TYPE, SHADOW_SOFT } from '../constants/theme';
+import ScreenBackdrop from '../components/ScreenBackdrop';
 
 export default function MoveScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.inner}>
-        <Text style={styles.title}>Move</Text>
-        <Text style={styles.subtitle}>Coming soon</Text>
-      </View>
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <ScreenBackdrop variant="c" />
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+        <Text style={styles.eyebrow}>Gentle movement</Text>
+        <Text style={styles.title}>What might help today</Text>
+        <View style={styles.card}>
+          <Text style={styles.cardText}>Coming soon.</Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.background },
-  inner: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: SPACING.lg },
-  title: { fontSize: FONT_SIZES.title, fontWeight: '600', color: COLORS.ink },
-  subtitle: { fontSize: FONT_SIZES.body, color: COLORS.textMuted, marginTop: SPACING.sm },
+  scroll: { paddingHorizontal: SPACING.lg, paddingTop: SPACING.md, paddingBottom: SPACING.xxl },
+  eyebrow: { ...TYPE.label, color: COLORS.gold },
+  title: { ...TYPE.title, color: COLORS.ink, marginTop: SPACING.xs },
+  card: {
+    marginTop: SPACING.xl,
+    padding: SPACING.lg,
+    borderRadius: 20,
+    backgroundColor: COLORS.surface,
+    ...SHADOW_SOFT,
+  },
+  cardText: { ...TYPE.body, color: COLORS.textSecondary },
 });
