@@ -50,3 +50,20 @@ export async function getCheckin(date) {
 export async function clearAll() {
   await AsyncStorage.multiRemove(Object.values(KEYS));
 }
+
+export async function getPeriods() {
+  const list = await read(KEYS.periods, []);
+  return list.sort((a, b) => (a.start < b.start ? 1 : -1));
+}
+
+export async function savePeriod(entry) {
+  const list = await read(KEYS.periods, []);
+  const withoutDupe = list.filter((p) => p.id !== entry.id);
+  withoutDupe.push(entry);
+  return write(KEYS.periods, withoutDupe);
+}
+
+export async function deletePeriod(id) {
+  const list = await read(KEYS.periods, []);
+  return write(KEYS.periods, list.filter((p) => p.id !== id));
+}
