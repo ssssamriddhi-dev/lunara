@@ -67,3 +67,27 @@ export async function deletePeriod(id) {
   const list = await read(KEYS.periods, []);
   return write(KEYS.periods, list.filter((p) => p.id !== id));
 }
+
+export async function getNickname() {
+  return read(KEYS.nickname, null);
+}
+
+export async function setNickname(name) {
+  return write(KEYS.nickname, name);
+}
+
+export async function dataSummary() {
+  const checkins = await getCheckins();
+  const periods = await read(KEYS.periods, []);
+  const moodCounts = {};
+  Object.values(checkins).forEach((c) => {
+    (c.moods || []).forEach((m) => { moodCounts[m] = (moodCounts[m] || 0) + 1; });
+  });
+  const topMood = Object.entries(moodCounts).sort((a, b) => b[1] - a[1])[0];
+  return {
+    checkinDays: Object.keys(checkins).length,
+    periodCount: periods.length,
+    topMood: topMood ? topMood[0] : null,
+    topMoodCount: topMood ? topMood[1] : 0,
+  };
+}

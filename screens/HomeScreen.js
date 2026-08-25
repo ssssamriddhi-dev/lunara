@@ -7,7 +7,7 @@ import { RESPONSES } from '../data/responses';
 import ResponseCard from '../components/ResponseCard';
 import { Bloom, MoonPhases } from '../components/Botanicals';
 import ScreenBackdrop from '../components/ScreenBackdrop';
-import { getCheckin, saveCheckin, todayKey } from '../storage/store';
+import { getCheckin, saveCheckin, todayKey, getNickname } from '../storage/store';
 
 function greeting() {
   const h = new Date().getHours();
@@ -21,9 +21,11 @@ function greeting() {
 export default function HomeScreen() {
   const [selected, setSelected] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [nick, setNick] = useState(null);
 
   useEffect(() => {
     let active = true;
+    getNickname().then((n) => { if (active) setNick(n); });
     getCheckin(todayKey()).then((entry) => {
       if (active && entry) setSelected(entry.moods);
       if (active) setLoading(false);
@@ -59,7 +61,7 @@ export default function HomeScreen() {
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>{today}</Text>
-        <Text style={styles.title}>{greeting()}</Text>
+        <Text style={styles.title}>{greeting()}{nick ? `, ${nick}` : ''}</Text>
         <MoonPhases width={140} opacity={0.4} style={styles.phases} />
 
         <View style={styles.card}>
