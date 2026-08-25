@@ -1,0 +1,161 @@
+export const MOVE_CATEGORIES = [
+  { id: 'cramps', title: 'Cramps', blurb: 'Gentle release for the lower belly and back' },
+  { id: 'lowenergy', title: 'Low energy', blurb: 'Small movement, no pressure' },
+  { id: 'bloating', title: 'Bloating', blurb: 'Easing pressure and helping things move' },
+  { id: 'backpain', title: 'Back pain', blurb: 'Softening the lower back' },
+  { id: 'anxiety', title: 'Anxiety', blurb: 'Slowing the body down' },
+  { id: 'overstimulated', title: 'Overstimulated', blurb: 'Less input, less effort' },
+  { id: 'fatigue', title: 'Fatigue', blurb: 'Rest-shaped movement' },
+];
+
+const SAFE = 'Stop if this causes pain or makes you feel worse.';
+
+export const EXERCISES = [
+  {
+    id: 'childs-pose', cats: ['cramps', 'backpain', 'lowenergy'],
+    title: "Child's pose", duration: '2–3 min', level: 'Easy',
+    steps: [
+      'Kneel on the floor with your big toes touching and knees apart',
+      'Sit back towards your heels',
+      'Walk your hands forward and let your forehead rest down',
+      'Let your belly soften between your thighs',
+      'Breathe slowly into your lower back',
+    ],
+    note: 'A cushion under your hips or forehead makes this easier.',
+    safe: SAFE,
+  },
+  {
+    id: 'cat-cow', cats: ['cramps', 'bloating', 'backpain'],
+    title: 'Cat-cow', duration: '1–2 min', level: 'Easy',
+    steps: [
+      'Come onto hands and knees, wrists under shoulders, knees under hips',
+      'Inhale: drop your belly, lift your chest and tailbone',
+      'Exhale: round your spine, tuck your chin and tailbone',
+      'Move slowly with your breath, about 8 to 10 rounds',
+    ],
+    note: 'Keep the movement small if your back is sore.',
+    safe: SAFE,
+  },
+  {
+    id: 'knee-chest', cats: ['cramps', 'bloating'],
+    title: 'Knee to chest', duration: '2 min', level: 'Easy',
+    steps: [
+      'Lie on your back with legs extended',
+      'Draw one knee towards your chest and hold behind the thigh',
+      'Hold for 30 seconds, breathing slowly',
+      'Swap sides, then try both knees together',
+    ],
+    note: 'Helpful for trapped wind as well as cramping.',
+    safe: SAFE,
+  },
+  {
+    id: 'pelvic-tilt', cats: ['cramps', 'backpain'],
+    title: 'Pelvic tilts', duration: '1–2 min', level: 'Easy',
+    steps: [
+      'Lie on your back, knees bent, feet flat',
+      'Gently flatten your lower back into the floor',
+      'Release and let the natural curve return',
+      'Repeat slowly 10 to 15 times',
+    ],
+    note: 'Very small movement. It should feel almost lazy.',
+    safe: SAFE,
+  },
+  {
+    id: 'walk-short', cats: ['cramps', 'bloating', 'lowenergy', 'anxiety', 'overstimulated', 'fatigue'],
+    title: 'A short walk', duration: '5–15 min', level: 'Easy',
+    steps: [
+      'Go outside if you can, or move around indoors',
+      'Keep the pace comfortable, not brisk',
+      'Let your arms swing loosely',
+      'Turn back whenever you want to',
+    ],
+    note: 'Distance is not the point. Ten minutes counts.',
+    safe: SAFE,
+  },
+  {
+    id: 'torso-twist', cats: ['bloating'],
+    title: 'Seated torso rotations', duration: '1–2 min', level: 'Easy',
+    steps: [
+      'Sit cross-legged or on a chair with feet flat',
+      'Place one hand on the opposite knee',
+      'Turn gently from the waist, looking over your shoulder',
+      'Hold for a few breaths, then swap',
+    ],
+    note: 'Turn from the ribs, not the neck.',
+    safe: SAFE,
+  },
+  {
+    id: 'supine-twist', cats: ['backpain', 'bloating', 'anxiety'],
+    title: 'Lying twist', duration: '2–3 min', level: 'Easy',
+    steps: [
+      'Lie on your back, knees bent',
+      'Let both knees fall slowly to one side',
+      'Turn your head the opposite way if comfortable',
+      'Rest for 30 to 60 seconds, then swap',
+    ],
+    note: 'A cushion between or under the knees helps.',
+    safe: SAFE,
+  },
+  {
+    id: 'mobility-5', cats: ['lowenergy', 'fatigue'],
+    title: 'Five-minute mobility', duration: '5 min', level: 'Easy',
+    steps: [
+      'Roll your shoulders backwards 10 times',
+      'Circle your wrists and ankles',
+      'Gentle neck tilts, ear towards shoulder',
+      'Reach both arms overhead and lower slowly',
+      'Finish with three slow breaths',
+    ],
+    note: 'Can be done sitting down entirely.',
+    safe: SAFE,
+  },
+  {
+    id: 'legs-up', cats: ['fatigue', 'lowenergy', 'anxiety', 'overstimulated'],
+    title: 'Legs up the wall', duration: '5–10 min', level: 'Easy',
+    steps: [
+      'Sit sideways next to a wall',
+      'Swing your legs up as you lower your back to the floor',
+      'Rest your arms wherever is comfortable',
+      'Stay for as long as it feels good',
+    ],
+    note: 'Barely counts as exercise, which is the point.',
+    safe: SAFE,
+  },
+  {
+    id: 'breathing', cats: ['anxiety', 'overstimulated', 'fatigue'],
+    title: 'Slow breathing', duration: '1–3 min', level: 'Easy',
+    steps: [
+      'Sit or lie somewhere comfortable',
+      'Inhale through your nose for 4 seconds',
+      'Hold for 2 seconds',
+      'Exhale through your mouth for 6 seconds',
+      'Repeat for a minute or more',
+    ],
+    note: 'A longer out-breath than in-breath is the useful part.',
+    safe: 'Stop if you feel lightheaded and breathe normally.',
+  },
+  {
+    id: 'shoulder-release', cats: ['anxiety', 'overstimulated'],
+    title: 'Jaw and shoulder release', duration: '1 min', level: 'Easy',
+    steps: [
+      'Unclench your jaw and let your tongue rest low in your mouth',
+      'Lift your shoulders up towards your ears',
+      'Drop them heavily on an out-breath',
+      'Repeat three times, then let your arms hang',
+    ],
+    note: 'Can be done anywhere, including at a desk.',
+    safe: SAFE,
+  },
+  {
+    id: 'slow-stretch', cats: ['overstimulated', 'fatigue', 'lowenergy'],
+    title: 'Slow full-body stretch', duration: '3–5 min', level: 'Easy',
+    steps: [
+      'Stand or sit and reach both arms overhead',
+      'Lean slowly to one side, then the other',
+      'Fold forward loosely, knees soft, let your head hang',
+      'Roll up slowly, one vertebra at a time',
+    ],
+    note: 'Move at half the speed you think you should.',
+    safe: SAFE,
+  },
+];
