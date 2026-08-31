@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
@@ -14,10 +14,13 @@ import {
 import { View, ActivityIndicator } from 'react-native';
 import AppNavigator from './navigation/AppNavigator';
 import SplashScreen from './screens/SplashScreen';
+import Onboarding from './screens/Onboarding';
+import { isOnboarded } from './storage/store';
 import { COLORS } from './constants/theme';
 
 export default function App() {
-  const [ready, setReady] = useState(false);
+  const [splashDone, setSplashDone] = useState(false);
+  const [onboarded, setOnboarded] = useState(null);
 
   const [loaded] = useFonts({
     CormorantGaramond_400Regular,
@@ -27,7 +30,11 @@ export default function App() {
     Inter_600SemiBold,
   });
 
-  if (!loaded) {
+  useEffect(() => {
+    isOnboarded().then(setOnboarded);
+  }, []);
+
+  if (!loaded || onboarded === null) {
     return (
       <View style={{ flex: 1, backgroundColor: COLORS.background, alignItems: 'center', justifyContent: 'center' }}>
         <ActivityIndicator color={COLORS.slate} />
@@ -37,7 +44,13 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      {ready ? <AppNavigator /> : <SplashScreen onDone={() => setReady(true)} />}
+      {!splashDone ? (
+        <SplashScreen onDone={() => setSplashDone(true)} />
+      ) : !onboarded ? (
+        <Onboarding onDone={() => setOnboarded(true)} />
+      ) : (
+        <AppNavigator />
+      )}
       <StatusBar style="dark" />
     </SafeAreaProvider>
   );

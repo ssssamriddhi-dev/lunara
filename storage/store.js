@@ -91,3 +91,29 @@ export async function dataSummary() {
     topMoodCount: topMood ? topMood[1] : 0,
   };
 }
+
+const ONBOARD_KEY = 'lunara:onboarded';
+
+export async function isOnboarded() {
+  return read(ONBOARD_KEY, false);
+}
+
+export async function setOnboarded() {
+  return write(ONBOARD_KEY, true);
+}
+
+export async function saveOnboarding({ nickname, lastPeriod, periodLength, cycleLength }) {
+  if (nickname) await write(KEYS.nickname, nickname);
+  if (lastPeriod) {
+    await savePeriod({
+      id: lastPeriod,
+      start: lastPeriod,
+      end: null,
+      flow: null,
+      symptoms: [],
+      estimatedPeriodLength: periodLength || null,
+    });
+  }
+  if (cycleLength) await write('lunara:statedCycle', cycleLength);
+  return setOnboarded();
+}
