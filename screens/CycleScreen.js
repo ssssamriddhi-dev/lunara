@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT, SHADOW_LIFT } from '../constants/theme';
 import { getPeriods } from '../storage/store';
 import { cycleStats, currentCycle, formatDate } from '../utils/cycle';
@@ -14,6 +15,7 @@ export default function CycleScreen() {
   const [periods, setPeriods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [logging, setLogging] = useState(false);
+  useBackHandler(!!logging, () => setLogging(false));
 
   const load = useCallback(() => {
     getPeriods().then((list) => {

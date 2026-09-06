@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { Alert, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
 import { getPeriods, dataSummary, getNickname, setNickname, clearAll } from '../storage/store';
@@ -23,6 +24,7 @@ export default function ProfileScreen() {
   const [name, setName] = useState('');
   const [editing, setEditing] = useState(false);
   const [sheet, setSheet] = useState(null);
+  useBackHandler(!!sheet, () => setSheet(null));
 
   const load = useCallback(() => {
     Promise.all([dataSummary(), getPeriods(), getNickname()]).then(([s, p, n]) => {

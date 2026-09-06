@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
 import { CATEGORIES, ARTICLES } from '../data/learn';
 
 function Article({ article, onClose }) {
+
   return (
     <SafeAreaView style={styles.readerWrap} edges={['top']}>
       <ScreenBackdrop variant="b" />
@@ -45,6 +47,7 @@ function Article({ article, onClose }) {
 
 export default function LearnScreen() {
   const [open, setOpen] = useState(null);
+  useBackHandler(!!open, () => setOpen(null));
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>

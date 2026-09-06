@@ -6,6 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { COLORS, SPACING, RADIUS, TYPE, GRADIENTS } from '../constants/theme';
 import WombLine from '../components/WombLine';
 import { saveOnboarding } from '../storage/store';
+import useBackHandler from '../components/useBackHandler';
 
 const PERIOD_OPTIONS = [
   { id: 3, label: '2–3 days' },
@@ -57,6 +58,8 @@ export default function Onboarding({ onDone }) {
   };
 
   const next = () => (step === 4 ? finish() : setStep(step + 1));
+
+  useBackHandler(step > 0, () => setStep(step - 1));
 
   return (
     <View style={styles.root}>

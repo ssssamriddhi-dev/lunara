@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
 import { MOVE_CATEGORIES, EXERCISES } from '../data/exercises';
 
 function Detail({ item, onClose }) {
+
   return (
     <SafeAreaView style={styles.readerWrap} edges={['top']}>
       <ScreenBackdrop variant="a" />
@@ -43,6 +45,7 @@ function Detail({ item, onClose }) {
 export default function MoveScreen() {
   const [cat, setCat] = useState(MOVE_CATEGORIES[0].id);
   const [open, setOpen] = useState(null);
+  useBackHandler(!!open, () => setOpen(null));
 
   const active = MOVE_CATEGORIES.find((c) => c.id === cat);
   const list = EXERCISES.filter((e) => e.cats.includes(cat));
