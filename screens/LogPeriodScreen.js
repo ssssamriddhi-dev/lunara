@@ -83,6 +83,9 @@ export default function LogPeriodScreen({ onSaved }) {
             mode="date"
             maximumDate={new Date()}
             display={Platform.OS === 'ios' ? 'inline' : 'default'}
+            themeVariant="light"
+            accentColor={COLORS.orchid}
+            textColor={COLORS.ink}
             onChange={onPick}
           />
         )}

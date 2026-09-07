@@ -120,6 +120,9 @@ export default function Onboarding({ onDone }) {
                       mode="date"
                       maximumDate={new Date()}
                       display={Platform.OS === 'ios' ? 'inline' : 'default'}
+                      themeVariant="light"
+                      accentColor={COLORS.orchid}
+                      textColor={COLORS.ink}
                       onChange={(e, d) => {
                         if (Platform.OS === 'android') setPicker(false);
                         if (d) setLastPeriod(d);

@@ -5,6 +5,22 @@ import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
 import { MOVE_CATEGORIES, EXERCISES } from '../data/exercises';
+import { PoseArt, FadeIn } from '../components/Visuals';
+
+const POSE = {
+  'childs-pose': 'child',
+  'cat-cow': 'cat',
+  'knee-chest': 'knee',
+  'pelvic-tilt': 'rest',
+  'walk-short': 'walk',
+  'torso-twist': 'cat',
+  'supine-twist': 'knee',
+  'mobility-5': 'walk',
+  'legs-up': 'rest',
+  'breathing': 'breathe',
+  'shoulder-release': 'breathe',
+  'slow-stretch': 'walk',
+};
 
 function Detail({ item, onClose }) {
 
@@ -18,6 +34,10 @@ function Detail({ item, onClose }) {
           <Text style={styles.meta}>{item.level}</Text>
         </View>
         <Text style={styles.readerTitle}>{item.title}</Text>
+
+        <View style={styles.artWrap}>
+          <PoseArt pose={POSE[item.id] || 'rest'} size={140} />
+        </View>
 
         <View style={styles.steps}>
           {item.steps.map((s, i) => (
@@ -79,14 +99,17 @@ export default function MoveScreen() {
 
         <Text style={styles.blurb}>{active.blurb}</Text>
 
-        {list.map((e) => (
-          <Pressable key={e.id} style={styles.card} onPress={() => setOpen(e)}>
-            <View style={styles.cardMain}>
+        {list.map((e, i) => (
+          <FadeIn key={e.id} delay={i * 70}>
+          <Pressable style={styles.card} onPress={() => setOpen(e)}>
+            <PoseArt pose={POSE[e.id] || 'rest'} size={44} />
+            <View style={[styles.cardMain, { marginLeft: SPACING.md }]}>
               <Text style={styles.cardTitle}>{e.title}</Text>
               <Text style={styles.cardMeta}>{e.duration} · {e.level}</Text>
             </View>
             <Text style={styles.chev}>›</Text>
           </Pressable>
+          </FadeIn>
         ))}
 
         <Text style={styles.disclaimer}>
@@ -138,6 +161,7 @@ const styles = StyleSheet.create({
     ...SHADOW_SOFT,
   },
   cardMain: { flex: 1 },
+  artWrap: { alignItems: 'center', marginTop: SPACING.md },
   cardTitle: { ...TYPE.bodyMedium, color: COLORS.ink },
   cardMeta: { ...TYPE.caption, color: COLORS.textMuted, marginTop: 1 },
   chev: { fontSize: 22, color: COLORS.textMuted, marginLeft: SPACING.sm },

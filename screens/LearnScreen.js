@@ -5,6 +5,7 @@ import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
 import { CATEGORIES, ARTICLES } from '../data/learn';
+import { PhaseWheel, FadeIn } from '../components/Visuals';
 
 function Article({ article, onClose }) {
 
@@ -14,6 +15,8 @@ function Article({ article, onClose }) {
       <ScrollView contentContainerStyle={styles.reader} showsVerticalScrollIndicator={false}>
         <Text style={styles.readTime}>{article.read} read</Text>
         <Text style={styles.readerTitle}>{article.title}</Text>
+
+        {article.id === 'phases' && <PhaseWheel size={210} />}
 
         {article.body.map((b, i) => {
           if (b.t === 'h') return <Text key={i} style={styles.h}>{b.v}</Text>;
@@ -66,14 +69,16 @@ export default function LearnScreen() {
               </Text>
               <Text style={styles.catBlurb}>{cat.blurb}</Text>
 
-              {items.map((a) => (
-                <Pressable key={a.id} style={styles.card} onPress={() => setOpen(a)}>
+              {items.map((a, i) => (
+                <FadeIn key={a.id} delay={i * 60}>
+                <Pressable style={styles.card} onPress={() => setOpen(a)}>
                   <View style={styles.cardMain}>
                     <Text style={styles.cardTitle}>{a.title}</Text>
                     <Text style={styles.cardRead}>{a.read}</Text>
                   </View>
                   <Text style={styles.chev}>›</Text>
                 </Pressable>
+                </FadeIn>
               ))}
             </View>
           );

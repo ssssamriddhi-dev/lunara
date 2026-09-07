@@ -8,7 +8,9 @@ import { getPeriods } from '../storage/store';
 import { cycleStats, currentCycle, formatDate } from '../utils/cycle';
 import CycleRing from '../components/CycleRing';
 import { Halo } from '../components/Botanicals';
+import { FadeIn } from '../components/Visuals';
 import ScreenBackdrop from '../components/ScreenBackdrop';
+import { PetalFall } from '../components/Motion';
 import LogPeriodScreen from './LogPeriodScreen';
 
 export default function CycleScreen() {
@@ -40,6 +42,7 @@ export default function CycleScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScreenBackdrop variant="c" />
+      <PetalFall count={5} />
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>Your cycle</Text>
@@ -192,6 +195,13 @@ const styles = StyleSheet.create({
   hair: { height: 1, backgroundColor: COLORS.border, marginVertical: SPACING.md },
   predictNote: { ...TYPE.caption, color: COLORS.textMuted, lineHeight: 18 },
   statRow: { flexDirection: 'row', gap: SPACING.sm, marginTop: SPACING.sm },
+  chartCard: {
+    marginTop: SPACING.sm,
+    padding: SPACING.lg,
+    borderRadius: 20,
+    backgroundColor: COLORS.surface,
+    ...SHADOW_SOFT,
+  },
   stat: {
     flex: 1,
     padding: SPACING.lg,

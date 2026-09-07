@@ -7,6 +7,7 @@ import { RESPONSES } from '../data/responses';
 import ResponseCard from '../components/ResponseCard';
 import { Bloom, MoonPhases } from '../components/Botanicals';
 import ScreenBackdrop from '../components/ScreenBackdrop';
+import { PetalFall } from '../components/Motion';
 import { getCheckin, saveCheckin, todayKey, getNickname } from '../storage/store';
 
 function greeting() {
@@ -58,6 +59,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScreenBackdrop variant="a" />
+      <PetalFall count={6} />
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>{today}</Text>
