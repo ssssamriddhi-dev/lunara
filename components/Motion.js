@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { Animated, Easing, View, StyleSheet, Dimensions } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Animated, Easing, View, StyleSheet, Dimensions, Pressable } from 'react-native';
 import Svg, { Path, Circle, G } from 'react-native-svg';
 import { PALETTE } from './Flora';
 import { COLORS } from '../constants/theme';
@@ -107,4 +107,83 @@ export function Shimmer({ children, style }) {
     ).start();
   }, []);
   return <Animated.View style={[style, { opacity: g }]}>{children}</Animated.View>;
+}
+
+/* Number that counts up when it appears */
+export function CountUp({ to = 0, duration = 900, style }) {
+  const v = useRef(new Animated.Value(0)).current;
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    const id = v.addListener(({ value }) => setN(Math.round(value)));
+    Animated.timing(v, { toValue: to, duration, easing: Easing.out(Easing.cubic), useNativeDriver: false }).start();
+    return () => v.removeListener(id);
+  }, [to]);
+  return <Animated.Text style={style}>{n}</Animated.Text>;
+}
+
+/* Press feedback: shrinks slightly on touch */
+export function Squish({ children, onPress, style }) {
+  const sc = useRef(new Animated.Value(1)).current;
+  const to = (v) => Animated.spring(sc, { toValue: v, friction: 6, tension: 120, useNativeDriver: true }).start();
+  return (
+    <Animated.View style={[style, { transform: [{ scale: sc }] }]}>
+      <Pressable
+        onPress={onPress}
+        onPressIn={() => to(0.96)}
+        onPressOut={() => to(1)}
+      >
+        {children}
+      </Pressable>
+    </Animated.View>
+  );
+}
+
+/* Slow drifting gradient orbs behind content */
+export function Aurora({ count = 3 }) {
+  const orbs = useRef(
+    Array.from({ length: count }, (_, i) => ({
+      size: 200 + i * 70,
+      x: (i % 2 === 0 ? -60 : width - 140),
+      y: 120 + i * 220,
+      tint: [PALETTE.blush, PALETTE.plum, COLORS.petal][i % 3],
+      dur: 9000 + i * 2500,
+    }))
+  ).current;
+
+  return (
+    <View style={StyleSheet.absoluteFill} pointerEvents="none">
+      {orbs.map((o, i) => <Orb key={i} {...o} />)}
+    </View>
+  );
+}
+
+function Orb({ size, x, y, tint, dur }) {
+  const a = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(a, { toValue: 1, duration: dur, easing: Easing.inOut(Easing.sin), useNativeDriver: true }),
+        Animated.timing(a, { toValue: 0, duration: dur, easing: Easing.inOut(Easing.sin), useNativeDriver: true }),
+      ])
+    ).start();
+  }, []);
+  return (
+    <Animated.View
+      style={{
+        position: 'absolute',
+        left: x,
+        top: y,
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        backgroundColor: tint,
+        opacity: 0.10,
+        transform: [
+          { translateY: a.interpolate({ inputRange: [0, 1], outputRange: [0, 46] }) },
+          { translateX: a.interpolate({ inputRange: [0, 1], outputRange: [0, -26] }) },
+          { scale: a.interpolate({ inputRange: [0, 1], outputRange: [1, 1.14] }) },
+        ],
+      }}
+    />
+  );
 }

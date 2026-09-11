@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
+import { Aurora } from '../components/Motion';
 import { CATEGORIES, ARTICLES } from '../data/learn';
 import { PhaseWheel, FadeIn } from '../components/Visuals';
 
@@ -12,6 +13,7 @@ function Article({ article, onClose }) {
   return (
     <SafeAreaView style={styles.readerWrap} edges={['top']}>
       <ScreenBackdrop variant="b" />
+      <Aurora count={3} />
       <ScrollView contentContainerStyle={styles.reader} showsVerticalScrollIndicator={false}>
         <Text style={styles.readTime}>{article.read} read</Text>
         <Text style={styles.readerTitle}>{article.title}</Text>

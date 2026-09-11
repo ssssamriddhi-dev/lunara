@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
+import { Aurora } from '../components/Motion';
 import { MOVE_CATEGORIES, EXERCISES } from '../data/exercises';
 import { PoseArt, FadeIn } from '../components/Visuals';
 
@@ -27,6 +28,7 @@ function Detail({ item, onClose }) {
   return (
     <SafeAreaView style={styles.readerWrap} edges={['top']}>
       <ScreenBackdrop variant="a" />
+      <Aurora count={3} />
       <ScrollView contentContainerStyle={styles.reader} showsVerticalScrollIndicator={false}>
         <View style={styles.metaRow}>
           <Text style={styles.meta}>{item.duration}</Text>
