@@ -7,7 +7,7 @@ export const CATEGORIES = [
 
 export const ARTICLES = [
   {
-    id: 'seek-help',
+    id: 'seek-help', icon: '⚠', summary: 'Bleeding, pain and cycle changes worth an appointment',
     cat: 'help',
     title: 'When to speak to a doctor',
     read: '3 min',
@@ -34,7 +34,7 @@ export const ARTICLES = [
     ],
   },
   {
-    id: 'being-heard',
+    id: 'being-heard', icon: '◈', summary: 'How to be believed, and what to bring',
     cat: 'help',
     title: 'Being taken seriously',
     read: '2 min',
@@ -53,7 +53,7 @@ export const ARTICLES = [
     ],
   },
   {
-    id: 'phases',
+    id: 'phases', icon: '◍', summary: 'Menstrual, follicular, ovulation, luteal — what each does',
     cat: 'cycle',
     title: 'The four phases',
     read: '4 min',
@@ -71,7 +71,7 @@ export const ARTICLES = [
     ],
   },
   {
-    id: 'ovulation',
+    id: 'ovulation', icon: '✦', summary: 'Why it moves, and what actually detects it',
     cat: 'cycle',
     title: 'What is ovulation?',
     read: '2 min',
@@ -91,7 +91,7 @@ export const ARTICLES = [
     ],
   },
   {
-    id: 'why-vary',
+    id: 'why-vary', icon: '∿', summary: 'Stress, sleep, illness and the other culprits',
     cat: 'cycle',
     title: 'Why cycles vary',
     read: '2 min',
@@ -116,7 +116,7 @@ export const ARTICLES = [
 
 ARTICLES.push(
   {
-    id: 'normal-cycle',
+    id: 'normal-cycle', icon: '◷', summary: 'The 28-day cycle is an average, not a standard',
     cat: 'normal',
     title: 'Normal cycle and period length',
     read: '2 min',
@@ -134,7 +134,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'blood',
+    id: 'blood', icon: '◉', summary: 'Brown blood, clots, and what is ordinary',
     cat: 'normal',
     title: 'Blood colour and clots',
     read: '2 min',
@@ -153,7 +153,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'pms',
+    id: 'pms', icon: '☾', summary: 'The symptoms, and where PMDD is different',
     cat: 'normal',
     title: 'PMS and mood changes',
     read: '3 min',
@@ -174,7 +174,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'pcos',
+    id: 'pcos', icon: '⬡', summary: 'What it affects, and how it is actually diagnosed',
     cat: 'conditions',
     title: 'PCOS',
     read: '4 min',
@@ -201,7 +201,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'endo',
+    id: 'endo', icon: '❋', summary: 'Why diagnosis takes years, and what to ask for',
     cat: 'conditions',
     title: 'Endometriosis',
     read: '3 min',
@@ -225,7 +225,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'heavy',
+    id: 'heavy', icon: '▼', summary: 'Signs it is too heavy, and the anaemia link',
     cat: 'conditions',
     title: 'Heavy bleeding and anaemia',
     read: '3 min',
@@ -249,7 +249,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'other-conditions',
+    id: 'other-conditions', icon: '⬢', summary: 'Fibroids, adenomyosis and thyroid',
     cat: 'conditions',
     title: 'Fibroids, adenomyosis and thyroid',
     read: '3 min',
@@ -273,7 +273,7 @@ CATEGORIES.push(
 
 ARTICLES.push(
   {
-    id: 'bc-overview',
+    id: 'bc-overview', icon: '⊘', summary: 'Every method, with real-world effectiveness',
     cat: 'contraception',
     title: 'The methods, compared',
     read: '5 min',
@@ -301,7 +301,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'bc-cycle',
+    id: 'bc-cycle', icon: '◑', summary: 'Why the placebo bleed is not a period',
     cat: 'contraception',
     title: 'What birth control does to your cycle',
     read: '3 min',
@@ -321,7 +321,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'fertile-window',
+    id: 'fertile-window', icon: '◐', summary: 'Six days, and why calendars miss them',
     cat: 'fertility',
     title: 'The fertile window',
     read: '3 min',
@@ -348,7 +348,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'trying',
+    id: 'trying', icon: '✿', summary: 'Timelines, what helps, and when to ask',
     cat: 'fertility',
     title: 'If you are trying to conceive',
     read: '3 min',
@@ -374,7 +374,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'hormones',
+    id: 'hormones', icon: '≋', summary: 'Oestrogen, progesterone, FSH and LH',
     cat: 'fertility',
     title: 'The four hormones that run your cycle',
     read: '3 min',
@@ -401,7 +401,7 @@ CATEGORIES.push(
 
 ARTICLES.push(
   {
-    id: 'perimenopause',
+    id: 'perimenopause', icon: '☽', summary: 'The years before periods stop',
     cat: 'menopause',
     title: 'What perimenopause actually is',
     read: '4 min',
@@ -432,7 +432,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'meno-help',
+    id: 'meno-help', icon: '✚', summary: 'HRT, alternatives, and red flags',
     cat: 'menopause',
     title: 'What helps, and when to get help',
     read: '3 min',
@@ -460,6 +460,81 @@ ARTICLES.push(
         'Symptoms are significantly affecting your work, relationships or mood',
       ]},
       { t: 'p', v: 'Postmenopausal bleeding always needs investigating. It is usually not serious, but it is never something to wait out.' },
+      { t: 'note', v: 'Sources: NHS, ACOG, Mayo Clinic' },
+    ],
+  },
+);
+
+ARTICLES.push(
+  {
+    id: 'meno-stages', icon: '◓', summary: 'Early, late, menopause, after',
+    cat: 'menopause',
+    title: 'The stages, and where you might be',
+    read: '3 min',
+    body: [
+      { t: 'p', v: 'The transition is usually described in stages. They overlap, and nobody moves through them tidily, but knowing the shape helps make sense of what is happening.' },
+      { t: 'h', v: 'Early perimenopause' },
+      { t: 'p', v: 'Cycles are still fairly regular but starting to vary — a week shorter here, a few days longer there. Oestrogen fluctuates rather than falls. This stage is frequently missed because periods still arrive.' },
+      { t: 'p', v: 'Sleep disruption, anxiety and a shorter temper often show up here, before anything obviously menstrual changes.' },
+      { t: 'h', v: 'Late perimenopause' },
+      { t: 'p', v: 'Cycles become clearly irregular and skipped periods start. Gaps of 60 days or more are common. Hot flushes and night sweats are more likely in this stage. It typically lasts one to three years.' },
+      { t: 'h', v: 'Menopause' },
+      { t: 'p', v: 'A single point, identified only in hindsight: twelve consecutive months with no period. The average age is 51, with a normal range of roughly 45 to 55.' },
+      { t: 'h', v: 'Postmenopause' },
+      { t: 'p', v: 'Everything afterwards. Hot flushes usually ease over several years, though for some they persist longer. Lower oestrogen brings longer-term considerations for bone and heart health, which is worth a conversation with a doctor rather than something to worry about alone.' },
+      { t: 'h', v: 'Early menopause' },
+      { t: 'p', v: 'Before 45 is called early menopause; before 40 is premature ovarian insufficiency, affecting around 1 in 100 people. It can follow surgery, chemotherapy or radiotherapy, or happen without any identifiable cause. It warrants medical follow-up, since longer exposure to low oestrogen carries different health considerations.' },
+      { t: 'note', v: 'Sources: NHS, ACOG, Mayo Clinic' },
+    ],
+  },
+  {
+    id: 'meno-mind', icon: '◌', summary: 'Brain fog is real and usually improves',
+    cat: 'menopause',
+    title: 'Mood, sleep and brain fog',
+    read: '3 min',
+    body: [
+      { t: 'p', v: 'The psychological symptoms are the ones most often dismissed, by doctors and by the people experiencing them. They are real, they are physiological, and they are treatable.' },
+      { t: 'h', v: 'Mood' },
+      { t: 'p', v: 'Fluctuating oestrogen affects serotonin. Anxiety, irritability and low mood are common, and they can appear years before any cycle change. Existing depression or anxiety may worsen.' },
+      { t: 'p', v: 'People with a history of PMS or postnatal depression appear to be more sensitive to these shifts. If that is you, it is worth knowing in advance rather than being blindsided.' },
+      { t: 'h', v: 'Sleep' },
+      { t: 'p', v: 'Waking at 3 or 4am and not getting back to sleep is one of the most commonly reported symptoms. Night sweats explain some of it, but not all — falling progesterone, which has a mildly sedating effect, plays a part too.' },
+      { t: 'p', v: 'The knock-on matters: poor sleep worsens mood, concentration and hot flushes, which then worsen sleep. Breaking that loop often helps more than treating any single symptom.' },
+      { t: 'h', v: 'Brain fog' },
+      { t: 'p', v: 'Word-finding difficulty, losing your thread, forgetting names. Studies do find measurable changes in verbal memory during the transition. For most people it improves after menopause rather than continuing to decline.' },
+      { t: 'p', v: 'This frightens people, often more than the physical symptoms, because it gets mistaken for early dementia. It usually is not.' },
+      { t: 'h', v: 'Worth saying' },
+      { t: 'p', v: 'If you feel like you are losing yourself, that is a recognised experience of this transition and not a personal failing. It is also a legitimate reason to seek help, not something to push through quietly.' },
+      { t: 'note', v: 'Sources: NHS, ACOG, Mayo Clinic' },
+    ],
+  },
+  {
+    id: 'meno-appointment', icon: '✎', summary: 'What to bring, and what to ask',
+    cat: 'menopause',
+    title: 'Getting a useful appointment',
+    read: '3 min',
+    body: [
+      { t: 'p', v: 'Perimenopause is under-diagnosed. Symptoms get attributed to stress, ageing, or treated one at a time by different specialists. Going in prepared changes the odds considerably.' },
+      { t: 'h', v: 'What to bring' },
+      { t: 'list', v: [
+        'Cycle dates for the last several months, including any skipped periods',
+        'A symptom list with how often and how severe',
+        'What it is stopping you doing — missed work, avoided situations, broken sleep',
+        'Your age and any family history of early menopause',
+        'Current medications and health conditions',
+      ]},
+      { t: 'h', v: 'On blood tests' },
+      { t: 'p', v: 'For most people over 45, perimenopause is diagnosed on symptoms and cycle pattern. Hormone levels swing so much day to day that a single FSH test is often unhelpful and can be falsely reassuring. Testing is more relevant under 45, or where the picture is unclear.' },
+      { t: 'p', v: 'If you are told your bloods are normal and therefore nothing is wrong, it is reasonable to ask whether symptoms and cycle history have been taken into account.' },
+      { t: 'h', v: 'Questions worth asking' },
+      { t: 'list', v: [
+        'Could these symptoms be perimenopausal?',
+        'Am I a candidate for HRT, and what are the risks and benefits for me specifically?',
+        'What are the options if HRT is not suitable?',
+        'What can be done about the bleeding, or the sleep, on its own?',
+        'When should I come back if this does not improve?',
+      ]},
+      { t: 'p', v: 'You can request a second opinion, or ask to see someone with a specialist interest in menopause. Being dismissed once is common and is not the end of the matter.' },
       { t: 'note', v: 'Sources: NHS, ACOG, Mayo Clinic' },
     ],
   },

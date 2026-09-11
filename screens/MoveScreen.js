@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
+import GrowingVine from '../components/GrowingVine';
 import { Aurora } from '../components/Motion';
 import { MOVE_CATEGORIES, EXERCISES } from '../data/exercises';
 import { PoseArt, FadeIn } from '../components/Visuals';
@@ -78,6 +79,7 @@ export default function MoveScreen() {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>Move</Text>
         <Text style={styles.title}>What might help</Text>
+        <GrowingVine height={72} />
 
         <ScrollView
           horizontal

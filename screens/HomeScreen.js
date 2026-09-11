@@ -7,9 +7,10 @@ import { SYMPTOMS } from '../data/symptoms';
 import { RESPONSES } from '../data/responses';
 import ResponseCard from '../components/ResponseCard';
 import ScreenBackdrop from '../components/ScreenBackdrop';
+import GrowingVine from '../components/GrowingVine';
 import PhaseCard from '../components/PhaseCard';
 import { MiniRing, MoodBars } from '../components/HomeCharts';
-import { PetalFall } from '../components/Motion';
+import { PetalFall, Ripple, SlideIn } from '../components/Motion';
 import { currentCycle } from '../utils/cycle';
 import {
   getCheckin, saveCheckin, todayKey, getNickname, getPeriods, getCheckins,
@@ -92,15 +93,19 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>{today}</Text>
         <Text style={styles.title}>{greeting()}{nick ? `, ${nick}` : ''}</Text>
+        <GrowingVine height={72} />
 
         {cycle && (
           <View style={styles.ringCard}>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Ripple size={130} />
             <MiniRing
               day={cycle.dayOfCycle}
               total={cycle.averageCycle || 28}
               phase={cycle.phase}
               size={130}
             />
+            </View>
             <View style={styles.ringSide}>
               <Text style={styles.ringTitle}>{cycle.phase}</Text>
               {cycle.daysUntilNext !== null && (

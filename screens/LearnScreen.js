@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, TYPE, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
-import { Aurora } from '../components/Motion';
+import GrowingVine from '../components/GrowingVine';
+import { Aurora, SlideIn } from '../components/Motion';
 import { CATEGORIES, ARTICLES } from '../data/learn';
 import { PhaseWheel, FadeIn } from '../components/Visuals';
 
@@ -60,23 +61,33 @@ export default function LearnScreen() {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>Learn</Text>
         <Text style={styles.title}>Your body, explained</Text>
+        <GrowingVine height={72} />
 
         {CATEGORIES.map((cat) => {
           const items = ARTICLES.filter((a) => a.cat === cat.id);
           if (!items.length) return null;
           return (
             <View key={cat.id} style={styles.section}>
+              <SlideIn from="left">
               <Text style={[styles.catTitle, { color: COLORS[cat.accent] || COLORS.ink }]}>
                 {cat.title}
               </Text>
               <Text style={styles.catBlurb}>{cat.blurb}</Text>
+              </SlideIn>
 
               {items.map((a, i) => (
                 <FadeIn key={a.id} delay={i * 60}>
-                <Pressable style={styles.card} onPress={() => setOpen(a)}>
+                <Pressable
+                  style={[styles.card, { borderLeftColor: COLORS[cat.accent] || COLORS.orchid }]}
+                  onPress={() => setOpen(a)}
+                >
+                  <View style={[styles.iconBox, { backgroundColor: (COLORS[cat.accent] || COLORS.orchid) + '22' }]}>
+                    <Text style={[styles.icon, { color: COLORS[cat.accent] || COLORS.orchid }]}>{a.icon || '◈'}</Text>
+                  </View>
                   <View style={styles.cardMain}>
                     <Text style={styles.cardTitle}>{a.title}</Text>
-                    <Text style={styles.cardRead}>{a.read}</Text>
+                    {a.summary ? <Text style={styles.cardSummary}>{a.summary}</Text> : null}
+                    <Text style={styles.cardRead}>{a.read} read</Text>
                   </View>
                   <Text style={styles.chev}>›</Text>
                 </Pressable>
@@ -110,6 +121,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     alignItems: 'center',
+    borderLeftWidth: 4,
     padding: SPACING.md,
     borderRadius: 16,
     backgroundColor: COLORS.surface,
@@ -117,8 +129,15 @@ const styles = StyleSheet.create({
     ...SHADOW_SOFT,
   },
   cardMain: { flex: 1 },
+  iconBox: {
+    width: 42, height: 42, borderRadius: 14,
+    alignItems: 'center', justifyContent: 'center',
+    marginRight: SPACING.md,
+  },
+  icon: { fontSize: 19 },
+  cardSummary: { ...TYPE.caption, color: COLORS.textSecondary, marginTop: 3, lineHeight: 17 },
   cardTitle: { ...TYPE.bodyMedium, color: COLORS.ink },
-  cardRead: { ...TYPE.caption, color: COLORS.textMuted, marginTop: 1 },
+  cardRead: { ...TYPE.caption, color: COLORS.textMuted, marginTop: 5, fontSize: 11 },
   chev: { fontSize: 22, color: COLORS.textMuted, marginLeft: SPACING.sm },
   disclaimer: {
     ...TYPE.caption,

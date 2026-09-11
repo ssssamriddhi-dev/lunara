@@ -187,3 +187,80 @@ function Orb({ size, x, y, tint, dur }) {
     />
   );
 }
+
+/* Burst of petals when something is selected */
+export function TapBurst({ trigger, color = PALETTE.magenta }) {
+  const a = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (!trigger) return;
+    a.setValue(0);
+    Animated.timing(a, { toValue: 1, duration: 620, easing: Easing.out(Easing.quad), useNativeDriver: true }).start();
+  }, [trigger]);
+
+  if (!trigger) return null;
+  const dirs = [0, 60, 120, 180, 240, 300];
+
+  return (
+    <View style={{ position: 'absolute', left: '50%', top: '50%' }} pointerEvents="none">
+      {dirs.map((d) => {
+        const rad = (d * Math.PI) / 180;
+        return (
+          <Animated.View
+            key={d}
+            style={{
+              position: 'absolute',
+              width: 6, height: 6, borderRadius: 3, backgroundColor: color,
+              opacity: a.interpolate({ inputRange: [0, 0.3, 1], outputRange: [0, 0.9, 0] }),
+              transform: [
+                { translateX: a.interpolate({ inputRange: [0, 1], outputRange: [0, Math.cos(rad) * 34] }) },
+                { translateY: a.interpolate({ inputRange: [0, 1], outputRange: [0, Math.sin(rad) * 34] }) },
+                { scale: a.interpolate({ inputRange: [0, 0.4, 1], outputRange: [0.3, 1.2, 0.4] }) },
+              ],
+            }}
+          />
+        );
+      })}
+    </View>
+  );
+}
+
+/* Pulsing halo ring that expands outward and fades */
+export function Ripple({ color = COLORS.orchid, size = 120 }) {
+  const a = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(a, { toValue: 1, duration: 2800, easing: Easing.out(Easing.quad), useNativeDriver: true })
+    ).start();
+  }, []);
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={{
+        position: 'absolute',
+        width: size, height: size, borderRadius: size / 2,
+        borderWidth: 1.5, borderColor: color,
+        opacity: a.interpolate({ inputRange: [0, 1], outputRange: [0.45, 0] }),
+        transform: [{ scale: a.interpolate({ inputRange: [0, 1], outputRange: [0.7, 1.55] }) }],
+      }}
+    />
+  );
+}
+
+/* Content slides in from the side */
+export function SlideIn({ from = 'left', delay = 0, children, style }) {
+  const a = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.timing(a, { toValue: 1, duration: 520, delay, easing: Easing.out(Easing.cubic), useNativeDriver: true }).start();
+  }, []);
+  const dist = from === 'left' ? -40 : 40;
+  return (
+    <Animated.View
+      style={[style, {
+        opacity: a,
+        transform: [{ translateX: a.interpolate({ inputRange: [0, 1], outputRange: [dist, 0] }) }],
+      }]}
+    >
+      {children}
+    </Animated.View>
+  );
+}

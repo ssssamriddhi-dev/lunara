@@ -10,6 +10,7 @@ import CycleRing from '../components/CycleRing';
 import { Halo } from '../components/Botanicals';
 import { FadeIn } from '../components/Visuals';
 import ScreenBackdrop from '../components/ScreenBackdrop';
+import GrowingVine from '../components/GrowingVine';
 import { PetalFall } from '../components/Motion';
 import LogPeriodScreen from './LogPeriodScreen';
 
@@ -47,6 +48,7 @@ export default function CycleScreen() {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>Your cycle</Text>
         <Text style={styles.title}>Where you are</Text>
+        <GrowingVine height={72} />
 
         {!cycle ? (
           <View style={styles.emptyCard}>
