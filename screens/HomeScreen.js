@@ -25,16 +25,21 @@ function greeting() {
   return 'Winding down';
 }
 
-function Chips({ items, selected, onToggle, tint }) {
+function Chips({ items, selected, onToggle }) {
   return (
     <View style={styles.chipWrap}>
       {items.map((it) => {
         const on = selected.includes(it.id);
+        const c = COLORS[it.tint] || COLORS.orchid;
         return (
           <Pressable
             key={it.id}
             onPress={() => onToggle(it.id)}
-            style={[styles.chip, on && { backgroundColor: tint, borderColor: tint }]}
+            style={[
+              styles.chip,
+              { borderColor: c + '55' },
+              on && { backgroundColor: c, borderColor: c },
+            ]}
           >
             <Text style={[styles.chipText, on && styles.chipTextOn]}>{it.label}</Text>
           </Pressable>
@@ -129,7 +134,6 @@ export default function HomeScreen() {
           <Chips
             items={MOODS}
             selected={moods}
-            tint={COLORS.ink}
             onToggle={(id) => toggle(moods, setMoods, id, symptoms, true)}
           />
         </View>
@@ -140,7 +144,6 @@ export default function HomeScreen() {
           <Chips
             items={SYMPTOMS}
             selected={symptoms}
-            tint={COLORS.terracotta}
             onToggle={(id) => toggle(symptoms, setSymptoms, id, moods, false)}
           />
         </View>

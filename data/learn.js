@@ -249,7 +249,7 @@ ARTICLES.push(
     ],
   },
   {
-    id: 'other-conditions', icon: '⬢', summary: 'Fibroids, adenomyosis and thyroid',
+    id: 'other-conditions', icon: '⬢', summary: 'Three common causes of cycle changes',
     cat: 'conditions',
     title: 'Fibroids, adenomyosis and thyroid',
     read: '3 min',

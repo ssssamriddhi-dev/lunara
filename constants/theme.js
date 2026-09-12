@@ -24,6 +24,19 @@ export const COLORS = {
   ovulation: '#9B7BB5',
   predicted: '#E8DCEC',
 
+  coral: '#E0806B',
+  amber: '#DCA84F',
+  butter: '#E8C765',
+  teal: '#5AA39C',
+  sage: '#8FA882',
+  sky: '#7398C9',
+  lilac: '#A88FCF',
+  mint: '#7FBFA8',
+  peach: '#E8A87C',
+  rose: '#D98BA4',
+  plum: '#8E6BA8',
+  magenta: '#C4577E',
+
   border: '#EDE2EE',
   white: '#FFFFFF',
 };

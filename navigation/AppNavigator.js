@@ -11,6 +11,14 @@ import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
+const TAB_TINTS = {
+  Home: COLORS.rose,
+  Cycle: COLORS.terracotta,
+  Learn: COLORS.sky,
+  Move: COLORS.sage,
+  Profile: COLORS.plum,
+};
+
 const ICONS = {
   Home: '🌙',
   Cycle: '◍',
@@ -25,7 +33,7 @@ export default function AppNavigator() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarActiveTintColor: COLORS.orchid,
+          tabBarActiveTintColor: TAB_TINTS[route.name] || COLORS.orchid,
           tabBarInactiveTintColor: COLORS.textMuted,
           tabBarStyle: {
             backgroundColor: 'rgba(255,255,255,0.94)',

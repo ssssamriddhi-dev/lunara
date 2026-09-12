@@ -8,6 +8,7 @@ import GrowingVine from '../components/GrowingVine';
 import { Aurora } from '../components/Motion';
 import { MOVE_CATEGORIES, EXERCISES } from '../data/exercises';
 import { PoseArt, FadeIn } from '../components/Visuals';
+import { PALETTE } from '../components/Flora';
 
 const POSE = {
   'childs-pose': 'child',
@@ -24,7 +25,7 @@ const POSE = {
   'slow-stretch': 'walk',
 };
 
-function Detail({ item, onClose }) {
+function Detail({ item, tint = COLORS.orchid, onClose }) {
 
   return (
     <SafeAreaView style={styles.readerWrap} edges={['top']}>
@@ -32,14 +33,14 @@ function Detail({ item, onClose }) {
       <Aurora count={3} />
       <ScrollView contentContainerStyle={styles.reader} showsVerticalScrollIndicator={false}>
         <View style={styles.metaRow}>
-          <Text style={styles.meta}>{item.duration}</Text>
+          <Text style={[styles.meta, { color: tint }]}>{item.duration}</Text>
           <View style={styles.dot} />
           <Text style={styles.meta}>{item.level}</Text>
         </View>
         <Text style={styles.readerTitle}>{item.title}</Text>
 
         <View style={styles.artWrap}>
-          <PoseArt pose={POSE[item.id] || 'rest'} size={140} />
+          <PoseArt pose={POSE[item.id] || 'rest'} size={150} color={tint} />
         </View>
 
         <View style={styles.steps}>
@@ -72,6 +73,7 @@ export default function MoveScreen() {
 
   const active = MOVE_CATEGORIES.find((c) => c.id === cat);
   const list = EXERCISES.filter((e) => e.cats.includes(cat));
+  const tint = COLORS[active.accent] || PALETTE[active.accent] || COLORS.orchid;
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -93,7 +95,7 @@ export default function MoveScreen() {
               <Pressable
                 key={c.id}
                 onPress={() => setCat(c.id)}
-                style={[styles.chip, on && styles.chipOn]}
+                style={[styles.chip, on && { backgroundColor: COLORS[c.accent] || PALETTE[c.accent] || COLORS.orchid, borderColor: COLORS[c.accent] || PALETTE[c.accent] || COLORS.orchid }]}
               >
                 <Text style={[styles.chipText, on && styles.chipTextOn]}>{c.title}</Text>
               </Pressable>
@@ -105,11 +107,17 @@ export default function MoveScreen() {
 
         {list.map((e, i) => (
           <FadeIn key={e.id} delay={i * 70}>
-          <Pressable style={styles.card} onPress={() => setOpen(e)}>
-            <PoseArt pose={POSE[e.id] || 'rest'} size={44} />
+          <Pressable style={[styles.card, { borderLeftColor: tint }]} onPress={() => setOpen(e)}>
+            <PoseArt pose={POSE[e.id] || 'rest'} size={46} color={tint} />
             <View style={[styles.cardMain, { marginLeft: SPACING.md }]}>
               <Text style={styles.cardTitle}>{e.title}</Text>
-              <Text style={styles.cardMeta}>{e.duration} · {e.level}</Text>
+              <Text style={styles.cardSteps} numberOfLines={1}>{e.steps[0]}</Text>
+              <View style={styles.badgeRow}>
+                <View style={[styles.durBadge, { backgroundColor: tint + '22' }]}>
+                  <Text style={[styles.durText, { color: tint }]}>{e.duration}</Text>
+                </View>
+                <Text style={styles.levelText}>{e.level}</Text>
+              </View>
             </View>
             <Text style={styles.chev}>›</Text>
           </Pressable>
@@ -123,7 +131,7 @@ export default function MoveScreen() {
       </ScrollView>
 
       <Modal visible={!!open} animationType="slide" presentationStyle="pageSheet">
-        {open && <Detail item={open} onClose={() => setOpen(null)} />}
+        {open && <Detail item={open} tint={tint} onClose={() => setOpen(null)} />}
       </Modal>
     </SafeAreaView>
   );
@@ -155,6 +163,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.sm,
   },
   card: {
+    borderLeftWidth: 4,
     flexDirection: 'row',
     alignItems: 'center',
     padding: SPACING.md,
@@ -165,6 +174,11 @@ const styles = StyleSheet.create({
     ...SHADOW_SOFT,
   },
   cardMain: { flex: 1 },
+  cardSteps: { ...TYPE.caption, color: COLORS.textSecondary, marginTop: 3, lineHeight: 16 },
+  badgeRow: { flexDirection: 'row', alignItems: 'center', marginTop: 7 },
+  durBadge: { paddingHorizontal: 9, paddingVertical: 3, borderRadius: 999 },
+  durText: { ...TYPE.caption, fontSize: 11, fontFamily: 'Inter_500Medium' },
+  levelText: { ...TYPE.caption, color: COLORS.textMuted, fontSize: 11, marginLeft: SPACING.sm },
   artWrap: { alignItems: 'center', marginTop: SPACING.md },
   cardTitle: { ...TYPE.bodyMedium, color: COLORS.ink },
   cardMeta: { ...TYPE.caption, color: COLORS.textMuted, marginTop: 1 },
@@ -191,7 +205,7 @@ const styles = StyleSheet.create({
   readerTitle: { ...TYPE.title, color: COLORS.ink, marginTop: SPACING.xs },
   steps: { marginTop: SPACING.lg },
   stepRow: { flexDirection: 'row', alignItems: 'baseline', marginBottom: 12 },
-  stepNum: { ...TYPE.label, color: COLORS.orchid, width: 28 },
+  stepNum: { ...TYPE.label, color: COLORS.slate, width: 28 },
   stepText: { ...TYPE.body, color: COLORS.textSecondary, flex: 1, lineHeight: 22 },
   note: {
     fontFamily: 'CormorantGaramond_400Regular',

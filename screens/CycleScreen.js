@@ -4,9 +4,11 @@ import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT, SHADOW_LIFT } from '../constants/theme';
-import { getPeriods } from '../storage/store';
+import { getPeriods, getCheckins } from '../storage/store';
 import { cycleStats, currentCycle, formatDate } from '../utils/cycle';
 import CycleRing from '../components/CycleRing';
+import { LengthLine, Consistency, SymptomPhases, NotEnoughYet } from '../components/CycleGraphs';
+import { SYMPTOMS } from '../data/symptoms';
 import { Halo } from '../components/Botanicals';
 import { FadeIn } from '../components/Visuals';
 import ScreenBackdrop from '../components/ScreenBackdrop';
@@ -18,9 +20,11 @@ export default function CycleScreen() {
   const [periods, setPeriods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [logging, setLogging] = useState(false);
+  const [checkins, setCheckins] = useState({});
   useBackHandler(!!logging, () => setLogging(false));
 
   const load = useCallback(() => {
+    getCheckins().then(setCheckins);
     getPeriods().then((list) => {
       setPeriods(list);
       setLoading(false);
@@ -39,6 +43,16 @@ export default function CycleScreen() {
 
   const stats = cycleStats(periods);
   const cycle = currentCycle(periods);
+
+  const symptomCounts = {};
+  Object.values(checkins).forEach((e) => {
+    (e.symptoms || []).forEach((id) => { symptomCounts[id] = (symptomCounts[id] || 0) + 1; });
+  });
+  periods.forEach((p) => {
+    (p.symptoms || []).forEach((id) => { symptomCounts[id] = (symptomCounts[id] || 0) + 1; });
+  });
+  const symptomLabels = {};
+  SYMPTOMS.forEach((x) => { symptomLabels[x.id] = x.label; });
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -120,6 +134,18 @@ export default function CycleScreen() {
               </View>
             )}
           </>
+        )}
+
+        <Text style={styles.section}>Your patterns</Text>
+
+        {stats.cycleCount >= 4 ? (
+          <>
+            <LengthLine cycles={stats.allCycles} average={stats.averageCycle} />
+            <Consistency cycles={stats.allCycles} />
+            <SymptomPhases counts={symptomCounts} labels={symptomLabels} />
+          </>
+        ) : (
+          <NotEnoughYet have={stats.cycleCount} need={4} />
         )}
 
         <Pressable style={styles.logButton} onPress={() => setLogging(true)}>
@@ -237,6 +263,7 @@ const styles = StyleSheet.create({
     ...SHADOW_LIFT,
   },
   logButtonText: { ...TYPE.bodyMedium, color: COLORS.textOnDark },
+  section: { ...TYPE.label, color: COLORS.textMuted, marginTop: SPACING.xl },
   history: { marginTop: SPACING.xl },
   historyRow: {
     flexDirection: 'row',

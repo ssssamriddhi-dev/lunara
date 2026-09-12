@@ -1,11 +1,11 @@
 export const MOVE_CATEGORIES = [
-  { id: 'cramps', title: 'Cramps', blurb: 'Gentle release for the lower belly and back' },
-  { id: 'lowenergy', title: 'Low energy', blurb: 'Small movement, no pressure' },
-  { id: 'bloating', title: 'Bloating', blurb: 'Easing pressure and helping things move' },
-  { id: 'backpain', title: 'Back pain', blurb: 'Softening the lower back' },
-  { id: 'anxiety', title: 'Anxiety', blurb: 'Slowing the body down' },
-  { id: 'overstimulated', title: 'Overstimulated', blurb: 'Less input, less effort' },
-  { id: 'fatigue', title: 'Fatigue', blurb: 'Rest-shaped movement' },
+  { id: 'cramps', accent: 'terracotta', title: 'Cramps', blurb: 'Gentle release for the lower belly and back' },
+  { id: 'lowenergy', accent: 'amber', title: 'Low energy', blurb: 'Small movement, no pressure' },
+  { id: 'bloating', accent: 'sage', title: 'Bloating', blurb: 'Easing pressure and helping things move' },
+  { id: 'backpain', accent: 'slate', title: 'Back pain', blurb: 'Softening the lower back' },
+  { id: 'anxiety', accent: 'sky', title: 'Anxiety', blurb: 'Slowing the body down' },
+  { id: 'overstimulated', accent: 'plum', title: 'Overstimulated', blurb: 'Less input, less effort' },
+  { id: 'fatigue', accent: 'blush', title: 'Fatigue', blurb: 'Rest-shaped movement' },
 ];
 
 const SAFE = 'Stop if this causes pain or makes you feel worse.';
