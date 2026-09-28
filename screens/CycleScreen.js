@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT, SHADOW_LIFT } from '../constants/theme';
@@ -60,9 +60,14 @@ export default function CycleScreen() {
       <PetalFall count={5} />
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+        <Image
+          source={require('../assets/cycle-art.png')}
+          style={styles.mastheadBand}
+          resizeMode="contain"
+          pointerEvents="none"
+        />
         <Text style={styles.eyebrow}>Your cycle</Text>
         <Text style={styles.title}>Where you are</Text>
-        <GrowingVine height={72} />
 
         {!cycle ? (
           <View style={styles.emptyCard}>
@@ -195,6 +200,7 @@ function Stat({ label, value }) {
 }
 
 const styles = StyleSheet.create({
+  mastheadBand: { width: '100%', height: 110, opacity: 0.42, marginBottom: 4 },
   container: { flex: 1, backgroundColor: 'transparent' },
   center: { alignItems: 'center', justifyContent: 'center' },
   scroll: { paddingHorizontal: SPACING.lg, paddingTop: SPACING.md, paddingBottom: SPACING.xxl },

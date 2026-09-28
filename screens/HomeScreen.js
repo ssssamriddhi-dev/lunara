@@ -98,7 +98,6 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>{today}</Text>
         <Text style={styles.title}>{greeting()}{nick ? `, ${nick}` : ''}</Text>
-        <GrowingVine height={72} />
 
         {cycle && (
           <View style={styles.ringCard}>

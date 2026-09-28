@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { Alert, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, Alert, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT } from '../constants/theme';
@@ -69,8 +69,11 @@ export default function ProfileScreen() {
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScreenBackdrop variant="c" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
-        <Text style={styles.eyebrow}>Profile</Text>
-        <Text style={styles.title}>{name ? name : 'Yours'}</Text>
+        <View style={styles.masthead}>
+          <Image source={require('../assets/birthcontrol-art.png')} style={styles.mastheadArt} resizeMode="contain" pointerEvents="none" />
+          <Text style={styles.eyebrow}>Profile</Text>
+          <Text style={styles.title}>{name ? name : 'Yours'}</Text>
+        </View>
 
         <Pressable style={styles.nameRow} onPress={() => setEditing(true)}>
           <Text style={styles.nameHint}>
@@ -218,6 +221,8 @@ function Stat({ label, value, unit }) {
 }
 
 const styles = StyleSheet.create({
+  masthead: { position: 'relative', justifyContent: 'center', minHeight: 150 },
+  mastheadArt: { position: 'absolute', right: -30, top: -20, width: 150, height: 210, opacity: 0.38 },
   container: { flex: 1, backgroundColor: 'transparent' },
   scroll: { paddingHorizontal: SPACING.lg, paddingTop: SPACING.md, paddingBottom: SPACING.xxl },
   eyebrow: { ...TYPE.label, color: COLORS.gold },

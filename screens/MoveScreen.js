@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT } from '../constants/theme';
@@ -79,9 +79,11 @@ export default function MoveScreen() {
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScreenBackdrop variant="a" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
-        <Text style={styles.eyebrow}>Move</Text>
-        <Text style={styles.title}>What might help</Text>
-        <GrowingVine height={72} />
+        <View style={styles.masthead}>
+          <Image source={require('../assets/move-art.png')} style={styles.mastheadArt} resizeMode="contain" pointerEvents="none" />
+          <Text style={styles.eyebrow}>Move</Text>
+          <Text style={styles.title}>What might help</Text>
+        </View>
 
         <ScrollView
           horizontal
@@ -138,6 +140,8 @@ export default function MoveScreen() {
 }
 
 const styles = StyleSheet.create({
+  masthead: { position: 'relative', justifyContent: 'center', minHeight: 150 },
+  mastheadArt: { position: 'absolute', right: -30, top: -20, width: 150, height: 210, opacity: 0.38 },
   container: { flex: 1, backgroundColor: 'transparent' },
   scroll: { paddingTop: SPACING.md, paddingBottom: SPACING.xxl },
   eyebrow: { ...TYPE.label, color: COLORS.gold, paddingHorizontal: SPACING.lg },

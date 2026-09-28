@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useBackHandler from '../components/useBackHandler';
-import { COLORS, SPACING, TYPE, SHADOW_SOFT } from '../constants/theme';
+import { COLORS, SPACING, TYPE, RADIUS, SHADOW_SOFT } from '../constants/theme';
 import ScreenBackdrop from '../components/ScreenBackdrop';
 import GrowingVine from '../components/GrowingVine';
 import { Aurora, SlideIn } from '../components/Motion';
@@ -59,9 +59,16 @@ export default function LearnScreen() {
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScreenBackdrop variant="b" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
-        <Text style={styles.eyebrow}>Learn</Text>
-        <Text style={styles.title}>Your body, explained</Text>
-        <GrowingVine height={72} />
+        <View style={styles.masthead}>
+          <Image
+            source={require('../assets/learn-art.png')}
+            style={styles.mastheadArt}
+            resizeMode="contain"
+            pointerEvents="none"
+          />
+          <Text style={styles.eyebrow}>Learn</Text>
+          <Text style={styles.title}>Your body, explained</Text>
+        </View>
 
         {CATEGORIES.map((cat) => {
           const items = ARTICLES.filter((a) => a.cat === cat.id);
@@ -113,6 +120,11 @@ export default function LearnScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent' },
   scroll: { paddingHorizontal: SPACING.lg, paddingTop: SPACING.md, paddingBottom: SPACING.xxl },
+  masthead: { position: 'relative', justifyContent: 'center', minHeight: 150 },
+  mastheadArt: {
+    position: 'absolute', right: -60, top: -20,
+    width: 150, height: 210, opacity: 0.38,
+  },
   eyebrow: { ...TYPE.label, color: COLORS.gold },
   title: { ...TYPE.title, color: COLORS.ink, marginTop: SPACING.xs },
   section: { marginTop: SPACING.xl },
