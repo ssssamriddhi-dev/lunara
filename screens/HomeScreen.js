@@ -118,7 +118,7 @@ export default function HomeScreen() {
                     ? `Period estimated in ${cycle.daysUntilNext} days`
                     : cycle.daysUntilNext === 0
                     ? 'Period estimated around today'
-                    : `${Math.abs(cycle.daysUntilNext)} days past estimate`}
+                    : `${Math.abs(cycle.daysUntilNext)} days overdue`}
                 </Text>
               )}
             </View>
