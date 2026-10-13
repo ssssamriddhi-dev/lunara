@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, SPACING, RADIUS, TYPE, SHADOW_SOFT } from '../constants/theme';
@@ -57,20 +58,20 @@ export default function HomeScreen() {
   const [cycle, setCycle] = useState(null);
   const [allCheckins, setAllCheckins] = useState({});
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     let active = true;
     getNickname().then((n) => { if (active) setNick(n); });
     getPeriods().then((ps) => { if (active) setCycle(currentCycle(ps)); });
     getCheckins().then((c) => { if (active) setAllCheckins(c); });
     getCheckin(todayKey()).then((entry) => {
-      if (active && entry) {
-        setMoods(entry.moods || []);
-        setSymptoms(entry.symptoms || []);
+      if (active) {
+        setMoods(entry ? (entry.moods || []) : []);
+        setSymptoms(entry ? (entry.symptoms || []) : []);
       }
       if (active) setLoading(false);
     });
     return () => { active = false; };
-  }, []);
+  }, []));
 
   const toggle = (list, setList, id, otherList, isMood) => {
     const next = list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
