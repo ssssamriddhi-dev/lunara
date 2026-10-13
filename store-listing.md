@@ -37,4 +37,27 @@ Lunara is not a medical device and does not diagnose anything. Predictions are e
 Lunara is here to help you notice things. What you do with what you notice is up to you.
 
 ## Data Safety answers
-TODO
+
+Does your app collect or share any of the required user data types? → **No**
+
+Rationale: Play distinguishes *collected* (leaves the device to a server) from
+*stored locally*. Lunara has no account, no server and makes no network calls.
+Moods, symptoms and period dates stay in AsyncStorage on the device. Local
+storage is not collection, even though the data is sensitive.
+
+Follow-ups:
+- Is all user data encrypted in transit? → N/A, no data is transmitted
+- Do you provide a way for users to request data deletion? → Yes, the
+  "Clear all data" button in Profile
+- Independently validated? → No (optional badge, skipped)
+
+Elsewhere in the console:
+- Privacy policy URL: https://ssssamriddhi-dev.github.io/lunara/
+- App category: Health & Fitness
+- Content rating: separate questionnaire, answer honestly
+- AI disclosure: TICK IT — six AI-generated watercolour images ship in the app
+
+IMPORTANT: these answers stay true only while the app has no analytics, no
+crash reporting and no cloud backup. Adding any of those makes both this form
+and the full description false. Inaccurate Data Safety answers are a common
+cause of Play rejections and removals.
