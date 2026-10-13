@@ -61,3 +61,26 @@ IMPORTANT: these answers stay true only while the app has no analytics, no
 crash reporting and no cloud backup. Adding any of those makes both this form
 and the full description false. Inaccurate Data Safety answers are a common
 cause of Play rejections and removals.
+
+## Content rating questionnaire
+
+- Violence, sexual content, nudity, profanity, drugs, gambling, crude humour → No
+- **Medical or health content? → YES.** General educational information about
+  menstrual and reproductive health. Not diagnostic. Includes a disclaimer
+  directing users to a healthcare professional.
+- Shares location / allows user communication / in-app purchases → No
+
+Expected result: Everyone or Teen. Either is fine — don't steer it.
+
+DO NOT understate the health content to chase a lower rating. An inaccurate
+questionnaire gets apps removed, and Lunara genuinely covers periods, fertility
+and contraception.
+
+## Store graphics (in store/)
+
+- feature-graphic.png — 1024x500, 24-bit PNG, no alpha. REQUIRED.
+- icon-512.png — 512x512, 32-bit PNG with alpha. REQUIRED.
+- Screenshots — minimum 2, up to 8. Max dimension must be no more than 2x the
+  minimum dimension (so 2:1 is the ceiling). iPhone shots are 1170x2532 =
+  2.16:1 and are REJECTED as-is. Also: the blue dev-overlay button and the
+  "Code Scanner" status bar must not appear. Retake with the overlay hidden.
